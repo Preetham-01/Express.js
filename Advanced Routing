@@ -1,0 +1,64 @@
+// 1. String Pattern Path
+These are simpler and more readable patterns supported directly by Express. They allow for basic pattern matching using specific symbols like:
+
+: for route parameters (e.g., /users/:id)
+? for optional segments (e.g., /ab?cd)
+* for wildcards (e.g., /files/*)
+
+app.get('/ab?cd', (req, res) => {
+  res.send('Matched the route!');
+});
+
+Matching paths:
+/abcd, /acd → ✅ matches
+/abccd, /abc, /cd  → ❌ no match
+
+_______________________________________________
+
+// 2. Regex Patterns
+Regex routing allows you to define routes using regular expressions instead of static or parameterized paths.
+This gives you fine-grained control over which URLs match a route. 
+
+app.get(/pattern/, (req, res) => {
+  res.send('Matched the regex route!');
+});
+
+-------------------------------------------
+
+app.get('/ab+c', (req, res) => {
+  res.send('Matched pattern: ab+c');
+});
+
+Matching paths:
+/ab+c → ab+c ✅ matches
+/ac → ❌ no match
+// Matches routes like /abc, /abbc, /abbbc, etc.
+
+_______________________________________________
+
+// 3. Combining Patterns
+
+app.get('/items/:itemId([0-9]+)', (req, res) => {
+  res.send(`Item ID (numbers only): ${req.params.itemId}`);
+});
+
+Matching paths:
+/items/123 → Item ID: 123
+/items/abc → No match
+
+_______________________________________________
+
+// 4. Nested Routes
+Nested routes allow you to structure routes in a way that reflects a hierarchy 
+like grouping routes under a common prefix (such as /users, /products, etc.).
+
+// User routes
+app.get('/users/profile', (req, res) => {
+  res.send('User Profile Page');
+});
+
+
+// Product routes
+app.get('/products/list', (req, res) => {
+  res.send('Product List');
+});
