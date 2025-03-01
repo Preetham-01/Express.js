@@ -1,0 +1,14 @@
+Express.js, or simply Express, is a minimal and flexible Node.js web application framework that provides a robust set of features for building web and mobile applications.
+It simplifies the process of building server-side applications by offering powerful tools and middleware.
+
+// First Express App
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
