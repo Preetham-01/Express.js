@@ -1,0 +1,41 @@
+In Express.js, routing refers to defining how your application "responds to client requests" for specific endpoints (URLs) and HTTP methods (like GET, POST, etc.).
+
+//set of instructions:
+* When someone visits /about, show the About page.
+* When they submit a form to /submit, process the data.
+
+//Synatx
+app.httpMethod("path",callBack function);
+
+Instance of express.js : app // any name 
+HTTP Method            : GET, POST, PUT, UPDATE, DELETE
+Path                   : '/', '/about', '/contact'
+Callback Function      : (req, res) => {  route handlers or handler functions }
+
+
+//Install Express:
+npm init -y
+npm install express
+
+//Create app.js:
+const express = require('express'); 
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Home Page');
+});
+
+app.get('/about', (req, res) => {
+  res.send('About Page');
+});
+
+app.get('/contact', (req, res) => {
+  res.send('Contact Page');
+});
+
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
+});
+
+//Run the app:
+node app.js
